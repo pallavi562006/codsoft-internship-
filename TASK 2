@@ -1,0 +1,62 @@
+def add_task(tasks, task_name):
+    if task_name.strip():  # Check if task_name is not empty
+        tasks[task_name] = False
+        print("Task added:", task_name)
+    else:
+        print("Task name cannot be empty")
+
+def view_tasks(tasks):
+    if not tasks:
+        print("No tasks")
+    else:
+        print("Tasks:")
+        for index, (task, completed) in enumerate(tasks.items(), start=1):
+            status = "Completed" if completed else "Not Completed"
+            print(f"{index}. {task} - {status}")
+
+def mark_completed(tasks, task_name):
+    if task_name in tasks:
+        tasks[task_name] = True
+        print("Marked as completed:", task_name)
+    else:
+        print("Task not found")
+
+def delete_task(tasks, task_name):
+    if task_name in tasks:
+        del tasks[task_name]
+        print("Task deleted:", task_name)
+    else:
+        print("Task not found")
+
+def main():
+    tasks = {}
+
+    while True:
+        print("\n==== To-Do List ====")
+        print("1. Add Task")
+        print("2. View Tasks")
+        print("3. Mark Task as Completed")
+        print("4. Delete Task")
+        print("5. Exit")
+
+        choice = input("Enter your choice: ")
+
+        if choice == '1':
+            task_name = input("Enter task name: ")
+            add_task(tasks, task_name)
+        elif choice == '2':
+            view_tasks(tasks)
+        elif choice == '3':
+            task_name = input("Enter task name to mark as completed: ")
+            mark_completed(tasks, task_name)
+        elif choice == '4':
+            task_name = input("Enter task name to delete: ")
+            delete_task(tasks, task_name)
+        elif choice == '5':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice")
+
+if __name__ == "__main__":
+    main()
